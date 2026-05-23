@@ -1,0 +1,6 @@
+{
+  "name": "Discharge Summary System",
+  "description": "A clean, healthcare-focused UI for managing and printing patient discharge summaries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
