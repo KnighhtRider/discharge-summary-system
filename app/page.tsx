@@ -290,6 +290,7 @@ const PrintDeathStatsDocument = ({ onClose }: { onClose: () => void }) => {
   const totalMale = mockDeathData.reduce((acc, curr) => acc + curr.male, 0);
   const totalFemale = mockDeathData.reduce((acc, curr) => acc + curr.female, 0);
   const grandTotal = totalMale + totalFemale;
+  const deathDepartmentCount = mockDeathData.length;
 
   return (
     <div className="min-h-screen bg-slate-100 p-4 md:p-8 font-sans">
@@ -507,6 +508,7 @@ export default function Page() {
   const totalMale = mockDeathData.reduce((acc, curr) => acc + curr.male, 0);
   const totalFemale = mockDeathData.reduce((acc, curr) => acc + curr.female, 0);
   const grandTotal = totalMale + totalFemale;
+  const deathDepartmentCount = mockDeathData.length;
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans print:hidden">
@@ -820,6 +822,8 @@ export default function Page() {
             )}
           </div>
 
+          
+
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left align-middle border-collapse">
               <thead className="bg-[#0159a6] text-white font-medium border-b border-blue-100">
@@ -841,7 +845,6 @@ export default function Page() {
                     <th className="px-6 py-3.5 whitespace-nowrap">Department</th>
                     <th className="px-6 py-3.5 text-center whitespace-nowrap">Male</th>
                     <th className="px-6 py-3.5 text-center whitespace-nowrap">Female</th>
-                    <th className="px-6 py-3.5 text-center font-bold whitespace-nowrap">Total</th>
                   </tr>
                 )}
                 {activeTab === 'appointment' && (
@@ -906,15 +909,8 @@ export default function Page() {
                         <td className="px-6 py-3.5 text-slate-600">{data.department}</td>
                         <td className="px-6 py-3.5 text-slate-600 text-center">{data.male}</td>
                         <td className="px-6 py-3.5 text-slate-600 text-center">{data.female}</td>
-                        <td className="px-6 py-3.5 text-slate-700 text-center font-bold">{data.total}</td>
                       </tr>
                     ))}
-                    <tr className="bg-slate-200/80 font-bold border-t border-slate-300">
-                      <td colSpan={2} className="px-6 py-3.5 text-slate-800 text-center uppercase">Total</td>
-                      <td className="px-6 py-3.5 text-slate-800 text-center">{totalMale}</td>
-                      <td className="px-6 py-3.5 text-slate-800 text-center">{totalFemale}</td>
-                      <td className="px-6 py-3.5 text-slate-900 text-center font-bold">{grandTotal}</td>
-                    </tr>
                   </>
                 )}
                 {activeTab === 'appointment' && (
@@ -998,7 +994,41 @@ export default function Page() {
               </div>
             </div>
           )}
+
+          
         </section>
+
+        {activeTab === 'death' && (
+            <div className="px-6 py-5 border-b border-slate-200 bg-slate-50">
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">Death Statistics Overview</p>
+                   
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-slate-500">
+                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1">Period: 01-05-2024 to 22-05-2026</span>
+                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1">Departments: {mockDeathData.length}</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Total Deaths</p>
+                    <p className="mt-2 text-3xl font-semibold leading-none text-slate-900 tabular-nums">{grandTotal}</p>
+                  </div>
+                  <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Male</p>
+                    <p className="mt-2 text-3xl font-semibold leading-none text-slate-900 tabular-nums">{totalMale}</p>
+                  </div>
+                  <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Female</p>
+                    <p className="mt-2 text-3xl font-semibold leading-none text-slate-900 tabular-nums">{totalFemale}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
         {activeTab === 'user-collection' && (
           <section className="bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col overflow-hidden mb-6">
